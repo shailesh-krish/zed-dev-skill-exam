@@ -9,7 +9,8 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 /**
  * @method \Pyz\Zed\Training\Persistence\TrainingPersistenceFactory getFactory()
  */
-class TrainingRepository extends AbstractRepository
+class TrainingRepository extends AbstractRepository implements
+    TrainingRepositoryInterface
 {
  public function getAntelope(AntelopeCriteriaTransfer $antelopeCriteriaTransfer):?AntelopeTransfer
  {
