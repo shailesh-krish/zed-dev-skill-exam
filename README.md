@@ -176,3 +176,4 @@ See Glue API reference at [REST API reference](https://docs.spryker.com/docs/res
 ## Contributing to the repository
 
 For contribution guidelines, see [Code contribution guide](https://docs.spryker.com/docs/code-contribution-guide#code-contribution-guide).
+# zed-dev-skills git init git add README.md git commit -m first commit git branch -M main git remote add origin git@github.com:spryker-academy/zed-dev-skills.git git push -u origin main
