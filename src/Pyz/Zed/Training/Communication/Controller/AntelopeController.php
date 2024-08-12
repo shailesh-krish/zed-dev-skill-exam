@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AntelopeController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @return array<string,mixed>
+     */
     public function addAction(Request $request): array
     {
         $antelopeTransfer = new AntelopeTransfer();
