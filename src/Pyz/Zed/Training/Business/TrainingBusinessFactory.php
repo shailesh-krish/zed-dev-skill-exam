@@ -19,6 +19,11 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
         return new AntelopeWriter($this->getEntityManager());
     }
 
+    public function getTrainingEntityManager(): TrainingEntityManagerInterface
+    {
+        return $this->getEntityManager();
+    }
+
     public function createAntelopeReader(): AntelopeReader
     {
         return new AntelopeReader($this->getRepository());
