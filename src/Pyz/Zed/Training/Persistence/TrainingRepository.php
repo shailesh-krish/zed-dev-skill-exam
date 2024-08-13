@@ -29,7 +29,8 @@ class TrainingRepository extends AbstractRepository implements
     public function getAntelopeLocationById(int $idLocation
     ): ?AntelopeLocationTransfer {
         $antelopeLocationEntity = $this->getFactory()
-            ->createAntelopeLocationQuery()->findByIdAntelopeLocation($idLocation);
+            ->createAntelopeLocationQuery()->findPk($idLocation);
+      
         if (!$antelopeLocationEntity) {
             return null;
         }
