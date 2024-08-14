@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pyz\Zed\Training\Persistence;
 
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
@@ -23,7 +25,7 @@ class TrainingEntityManager extends AbstractEntityManager implements
         AntelopeLocationTransfer $antelopeLocationTransfer
     ): AntelopeLocationTransfer {
         $antelopeEntity = new PyzAntelopeLocation();
-       
+
         $antelopeEntity->fromArray($antelopeLocationTransfer->modifiedToArray());
         $antelopeEntity->save();
         return $antelopeLocationTransfer->fromArray($antelopeEntity->toArray(),

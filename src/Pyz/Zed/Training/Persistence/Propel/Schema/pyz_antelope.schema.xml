@@ -9,7 +9,7 @@
         <column name="id_antelope" required="true" type="INTEGER"
                 primaryKey="true" autoIncrement="true"/>
         <column name="name" required="true" type="VARCHAR" size="255"/>
-        <column name="id_location" required="true"
+        <column name="id_location" required="true" default="1"
                 type="INTEGER"/>
 
         <index name="pyz_antelope-id_location">

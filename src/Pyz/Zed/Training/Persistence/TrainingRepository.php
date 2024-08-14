@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pyz\Zed\Training\Persistence;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
@@ -30,7 +32,7 @@ class TrainingRepository extends AbstractRepository implements
     ): ?AntelopeLocationTransfer {
         $antelopeLocationEntity = $this->getFactory()
             ->createAntelopeLocationQuery()->findPk($idLocation);
-      
+
         if (!$antelopeLocationEntity) {
             return null;
         }
