@@ -12,6 +12,7 @@ class AntelopeGuiDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const FACADE_ANTELOPE = 'FACADE_ANTELOPE';
     public const PROPEL_QUERY_ANTELOPE = 'PROPEL_QUERY_ANTELOPE';
+    public const PROPEL_QUERY_ANTELOPE_LOCATION = 'PROPEL_QUERY_ANTELOPE_LOCATION';
 
     public function provideCommunicationLayerDependencies(Container $container
     ): Container {
@@ -19,7 +20,7 @@ class AntelopeGuiDependencyProvider extends AbstractBundleDependencyProvider
 
         $container = $this->addAntelopeFacade($container);
         $container = $this->addAntelopePropelQuery($container);
-
+        $container = $this->addAntelopeLocationPropelQuery($container);
         return $container;
     }
 
@@ -38,6 +39,16 @@ class AntelopeGuiDependencyProvider extends AbstractBundleDependencyProvider
         $container->set(static::PROPEL_QUERY_ANTELOPE,
             $container->factory(function () {
                 return PyzAntelopeQuery::create();
+            }));
+
+        return $container;
+    }
+
+    protected function addAntelopeLocationPropelQuery(Container $container
+    ): Container {
+        $container->set(static::PROPEL_QUERY_ANTELOPE_LOCATION,
+            $container->factory(function () {
+                return PyzAntelopeLocationQuery::create();
             }));
 
         return $container;

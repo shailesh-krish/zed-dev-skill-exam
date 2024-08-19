@@ -30,6 +30,11 @@ class AntelopeGuiCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(AntelopeGuiDependencyProvider::PROPEL_QUERY_ANTELOPE);
     }
 
+    public function getAntelopeLocationPropelQuery(): PyzAntelopeLocationQuery
+    {
+        return $this->getProvidedDependency(AntelopeGuiDependencyProvider::PROPEL_QUERY_ANTELOPE_LOCATION);
+    }
+
     /**
      * @param AntelopeTransfer $antelopeTransfer
      * @param array $options <string,mixed>
