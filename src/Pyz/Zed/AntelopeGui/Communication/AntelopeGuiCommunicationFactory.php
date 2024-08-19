@@ -6,6 +6,7 @@ namespace Pyz\Zed\AntelopeGui\Communication;
 
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
+use Orm\Zed\AntelopeLocation\Persistence\PyzAntelopeLocationQuery;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\AntelopeGui\AntelopeGuiDependencyProvider;
 use Pyz\Zed\AntelopeGui\Communication\Form\AntelopeCreateForm;

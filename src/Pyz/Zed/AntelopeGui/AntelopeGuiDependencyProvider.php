@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pyz\Zed\AntelopeGui;
 
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
+use Orm\Zed\AntelopeLocation\Persistence\PyzAntelopeLocationQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
