@@ -5,10 +5,10 @@
 
     <transfer name="Antelope">
         <property name="idAntelope" type="int"/>
-        <property name="idAntelopeLocation" type="int"/>
+        <property name="idLocation" type="int"/>
         <property name="name" type="string"/>
         <property name="color" type="string"/>
-        <property name="AntelopeLocationName" type="string"/>
+        <property name="LocationName" type="string"/>
     </transfer>
     <transfer name="AntelopeCriteria">
         <property name="name" type="string"/>

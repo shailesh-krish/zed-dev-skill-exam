@@ -16,6 +16,7 @@ class AntelopeEntityManager extends AbstractEntityManager implements
     public function createAntelope(AntelopeTransfer $antelopeTransfer
     ): AntelopeTransfer {
         $antelopeEntity = new PyzAntelope();
+
         $antelopeEntity->fromArray($antelopeTransfer->modifiedToArray());
         $antelopeEntity->save();
         return $antelopeTransfer->fromArray($antelopeEntity->toArray(), true);

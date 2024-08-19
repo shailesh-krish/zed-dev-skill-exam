@@ -7,6 +7,7 @@ namespace Pyz\Zed\AntelopeGui\Communication\Table;
 use Orm\Zed\Antelope\Persistence\Map\PyzAntelopeTableMap;
 use Orm\Zed\Antelope\Persistence\PyzAntelope;
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
+use Orm\Zed\AntelopeLocation\Persistence\Map\PyzAntelopeLocationTableMap;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
@@ -16,7 +17,7 @@ class AntelopeTable extends AbstractTable
     public const COL_ID_ANTELOPE = 'id_antelope';
     public const COL_NAME = 'name';
     public const COL_COLOR = 'color';
-
+    public const COL_LOCATION_NAME = 'location_name';
 
     public function __construct(protected PyzAntelopeQuery $antelopeQuery)
     {
@@ -30,20 +31,23 @@ class AntelopeTable extends AbstractTable
     protected function configure(TableConfiguration $config): TableConfiguration
     {
         $config->setHeader([
-            static::COL_ID_ANTELOPE => 'Antelope ID',
-            static::COL_NAME => 'Name',
-            static::COL_COLOR => 'Color',
+            PyzAntelopeTableMap::COL_ID_ANTELOPE => 'Antelope ID',
+            PyzAntelopeTableMap::COL_NAME => 'Name',
+            PyzAntelopeTableMap::COL_COLOR => 'Color',
+            PyzAntelopeLocationTableMap::COL_LOCATION_NAME => 'Location',
         ]);
 
         $config->setSortable([
-            static::COL_ID_ANTELOPE,
-            static::COL_NAME,
-            static::COL_COLOR,
+            PyzAntelopeTableMap::COL_ID_ANTELOPE,
+            PyzAntelopeTableMap::COL_NAME,
+            PyzAntelopeTableMap::COL_COLOR,
+            PyzAntelopeLocationTableMap::COL_LOCATION_NAME
         ]);
 
         $config->setSearchable([
             PyzAntelopeTableMap::COL_NAME,
             PyzAntelopeTableMap::COL_COLOR,
+            PyzAntelopeLocationTableMap::COL_LOCATION_NAME
         ]);
 
         return $config;
@@ -56,8 +60,10 @@ class AntelopeTable extends AbstractTable
      */
     protected function prepareData(TableConfiguration $config): array
     {
+        $query = $this->antelopeQuery->joinWithPyzAntelopeLocation();
+
         $antelopeEntityCollection = $this->runQuery(
-            $this->antelopeQuery,
+            $query,
             $config,
             true
         );
@@ -79,7 +85,12 @@ class AntelopeTable extends AbstractTable
         $returns = [];
 
         foreach ($antelopeEntityCollection as $antelopeEntity) {
-            $returns[] = $antelopeEntity->toArray();
+            $location = $antelopeEntity->getPyzAntelopeLocation();
+            $data[PyzAntelopeTableMap::COL_ID_ANTELOPE] = $antelopeEntity->getIdAntelope();
+            $data[PyzAntelopeTableMap::COL_NAME] = $antelopeEntity->getName();
+            $data[PyzAntelopeTableMap::COL_COLOR] = $antelopeEntity->getColor();
+            $data[PyzAntelopeLocationTableMap::COL_LOCATION_NAME] = $location->getLocationName();
+            $returns[] = $data;
         }
 
         return $returns;

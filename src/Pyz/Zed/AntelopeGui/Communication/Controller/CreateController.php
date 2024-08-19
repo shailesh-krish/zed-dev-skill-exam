@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pyz\Zed\AntelopeGui\Communication\Controller;
 
 use Generated\Shared\Transfer\AntelopeTransfer;
+use Pyz\Zed\AntelopeGui\Communication\Form\AntelopeCreateForm;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -26,8 +27,9 @@ class CreateController extends AbstractController
      */
     public function indexAction(Request $request): RedirectResponse|array
     {
+        $options[AntelopeCreateForm::LOCATION_CHOICES] = $this->getLocations();
         $antelopeCreateForm = $this->getFactory()
-            ->createAntelopeCreateForm(new AntelopeTransfer())
+            ->createAntelopeCreateForm(new AntelopeTransfer(), $options)
             ->handleRequest($request);
 
         if ($antelopeCreateForm->isSubmitted() && $antelopeCreateForm->isValid()) {
@@ -40,11 +42,22 @@ class CreateController extends AbstractController
         ]);
     }
 
+    private function getLocations()
+    {
+        $res = [];
+        $result = $this->getFactory()->getAntelopeLocationPropelQuery()
+            ->orderBy('location_name')->find();
+        foreach ($result as $location) {
+            $res[$location->getIdAntelopeLocation()] = $location->getLocationName();
+        }
+        return $res;
+    }
+
     protected function createAntelope(FormInterface $antelopeCreateForm
     ): RedirectResponse {
         /** @var AntelopeTransfer|null $antelopeTransfer */
         $antelopeTransfer = $antelopeCreateForm->getData();
-
+       
         $this->getFactory()
             ->getAntelopeFacade()
             ->createAntelope($antelopeTransfer);
