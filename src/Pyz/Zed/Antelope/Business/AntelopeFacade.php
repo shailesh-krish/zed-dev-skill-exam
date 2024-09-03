@@ -30,6 +30,10 @@ class AntelopeFacade extends AbstractFacade implements AntelopeFacadeInterface
         return $this->getFactory()->createAntelopeReader()->getAntelope($antelopeCriteriaTransfer);
     }
 
+    /**
+     * @param AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+     * @return array<AntelopeCriteriaTransfer>|null
+     */
     public function getAntelopes(
         AntelopeCriteriaTransfer $antelopeCriteriaTransfer
     ): ?array {

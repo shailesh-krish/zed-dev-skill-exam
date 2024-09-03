@@ -27,4 +27,8 @@ interface AntelopeFacadeInterface
     public function getAntelopeLocationById(
         int $idLocation
     ): ?AntelopeLocationTransfer;
+
+    public function getAntelopes(
+        AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+    ): ?array;
 }
