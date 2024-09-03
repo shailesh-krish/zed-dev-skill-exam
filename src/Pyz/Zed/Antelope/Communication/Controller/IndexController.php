@@ -35,4 +35,16 @@ class IndexController extends AbstractController
             'antelope' => $antelopeTransfer,
         ]);
     }
+
+    public function indexAction(Request $request): array
+    {
+        $antelopes = $this->getFacade()
+            ->getAntelopes((new AntelopeCriteriaTransfer()));
+
+
+        return $this->viewResponse([
+            'antelopes' => $antelopes,
+        ]);
+    }
+
 }

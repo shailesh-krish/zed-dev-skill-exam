@@ -16,4 +16,11 @@ class GatewayController extends AbstractGatewayController
         return $this->getFacade()
             ->getAntelope($antelopeCriteria);
     }
+
+    public function getAntelopesAction(
+        AntelopeCriteriaTransfer $antelopeCriteria
+    ): AntelopeResponseTransfer {
+        return $this->getFacade()
+            ->getAntelopes($antelopeCriteria);
+    }
 }
