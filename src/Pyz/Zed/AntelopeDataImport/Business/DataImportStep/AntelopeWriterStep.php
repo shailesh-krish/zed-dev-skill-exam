@@ -16,7 +16,7 @@ class AntelopeWriterStep implements DataImportStepInterface
         $antelopeEntity = PyzAntelopeQuery::create()
             ->filterByName($dataSet[AntelopeDataSetInterface::COLUMN_NAME])
             ->findOneOrCreate();
-        $antelopeEntity->setIdLocation(1);
+        $antelopeEntity->setIdLocation($dataSet[AntelopeDataSetInterface::COLUMN_ID_LOCATION]);
         $antelopeEntity->setColor($dataSet[AntelopeDataSetInterface::COLUMN_COLOR]);
 
         if ($antelopeEntity->isNew() || $antelopeEntity->isModified()) {
