@@ -8,9 +8,11 @@ use Pyz\Zed\Antelope\Persistence\AntelopeEntityManagerInterface;
 
 class AntelopeWriter
 {
+    protected $entityManager;
     public function __construct(
-        protected AntelopeEntityManagerInterface $entityManager
+        AntelopeEntityManagerInterface $entityManager
     ) {
+        $this->entityManager = $entityManager;
     }
 
     public function createAntelope(AntelopeTransfer $antelopeTransfer

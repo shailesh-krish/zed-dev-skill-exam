@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pyz\Zed\Antelope\Persistence;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
@@ -27,12 +28,37 @@ class AntelopeRepository extends AbstractRepository implements
         return (new AntelopeTransfer())->fromArray($antelopeEntity->toArray(),
             true);
     }
+    public function getAntelopeByLocationId(
+        AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+    ): ?AntelopeTransfer {
+        if ($antelopeCriteriaTransfer->getIdLocation()) {
+            $antelopeEntity = $this->getFactory()->createAntelopeQuery()->filterByPyzAntelopeLocation(
+                $antelopeCriteriaTransfer->getIdLocation(),
+            )->findOne();
+        }
+        if (!$antelopeEntity) {
+            return null;
+        }
+        return (new AntelopeTransfer())->fromArray($antelopeEntity->toArray(),
+            true);
+    }
 
     public function getAntelopeLocationById(int $idLocation
     ): ?AntelopeLocationTransfer {
         $antelopeLocationEntity = $this->getFactory()
             ->createAntelopeLocationQuery()->findPk($idLocation);
 
+        if (!$antelopeLocationEntity) {
+            return null;
+        }
+        return (new AntelopeLocationTransfer())->fromArray($antelopeLocationEntity->toArray(),
+            true);
+    }
+
+    public function getAntelopeLocation(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer
+    ): ?AntelopeLocationTransfer {
+        $antelopeLocationEntity = $this->getFactory()
+            ->createAntelopeLocationQuery()->filterByLocationName($antelopeLocationCriteriaTransfer->getLocationName())->findOne();
         if (!$antelopeLocationEntity) {
             return null;
         }

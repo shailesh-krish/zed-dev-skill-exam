@@ -7,14 +7,15 @@ use Pyz\Zed\Antelope\Persistence\AntelopeEntityManagerInterface;
 
 class AntelopeLocationWriter
 {
-    public function __construct(
-        protected AntelopeEntityManagerInterface $entityManager
+    protected $entityManager;
+    public function __construct(AntelopeEntityManagerInterface $entityManager
     ) {
+        $this->entityManager = $entityManager;
     }
 
     public function createAntelopeLocation(
         AntelopeLocationTransfer $antelopeLocationTransfer
-    ): AntelopeLocationTransfer {
+    ): ?AntelopeLocationTransfer {
         return $this->entityManager->createAntelopeLocation($antelopeLocationTransfer);
     }
 }

@@ -3,6 +3,9 @@
 namespace Pyz\Zed\Antelope\Communication\Controller;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationResponseTransfer;
+use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +20,19 @@ class IndexController extends AbstractController
      */
     public function addAction(Request $request): array
     {
+        $antelopeLocationResponse = new AntelopeLocationResponseTransfer();
+        $antelopLocationTransfer = new AntelopeLocationTransfer();
+        $antelopeLocationCriteria = new AntelopeLocationCriteriaTransfer();
+        $antelopLocationTransfer->setLocationName('New York');
+        $antelopeLocationResponse = $this->getFacade()
+            ->getAntelopeLocation($antelopeLocationCriteria->setLocationName($antelopLocationTransfer->getLocationName()));
+        if (!$antelopeLocationResponse) {
+           $antelopeLocationResponse =  $this->getFacade()->createAntelopeLocation($antelopLocationTransfer);
+        }
         $antelopeTransfer = new AntelopeTransfer();
-        $antelopeTransfer->setIdAntelopeLocation(1);
+        $antelopeTransfer->setIdLocation($antelopeLocationResponse->getIdAntelopeLocation());
         $antelopeTransfer->setColor('Red');
-        $name = $request->get('name') ?: 'Oskar';
+        $name = $request->get('name') ?: 'One';
         $antelopeTransfer->setName($name);
 
         $antelopeResponseTransfer = $this->getFacade()
