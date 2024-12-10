@@ -15,7 +15,7 @@ class AntelopePageRouteProviderPlugin extends AbstractRouteProviderPlugin
     /**
      * @var string
      */
-    protected const ROUTE_ANTELOPE_INDEX = 'antelope-page/antelope-index';
+    protected const ROUTE_ANTELOPE_INDEX = 'antelopes';
 
     /**
      * Specification:
@@ -39,7 +39,7 @@ class AntelopePageRouteProviderPlugin extends AbstractRouteProviderPlugin
      */
     protected function addAntelopeIndexRoute(RouteCollection $routeCollection): RouteCollection
     {
-        $route = $this->buildRoute('antelope-page/antelope-index', 'AntelopePage', 'Antelope', 'indexAction');
+        $route = $this->buildRoute('antelopes/list', 'AntelopePage', 'Antelope', 'indexAction');
         $routeCollection->add(static::ROUTE_ANTELOPE_INDEX, $route);
 
         return $routeCollection;
