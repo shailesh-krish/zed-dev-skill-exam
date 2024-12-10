@@ -6,8 +6,10 @@ namespace Pyz\Zed\Antelope\Persistence;
 
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeItemTransfer;
 use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
+use Generated\Shared\Transfer\AntelopeResponseTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 
 /**
@@ -22,4 +24,6 @@ interface AntelopeRepositoryInterface
     public function getAntelopeLocationById(int $idLocation
     ): ?AntelopeLocationTransfer;
     public function getAntelopeLocation(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer): ?AntelopeLocationTransfer;
+    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): ?AntelopeCollectionTransfer  ;
+    public function getAntelopes(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): ?AntelopeResponseTransfer;
 }

@@ -1,0 +1,18 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    items: _view.antelopes
+} %}
+{% block content %}
+
+    {% for item in data.items %}
+        <ul class="list-group fa-list-ul">
+            <li class="list-group-item">Id: {{ item.idAntelope }}</li>
+            <li class="list-group-item">Name: {{ item.name }}</li>
+            <li class="list-group-item">Color: {{ item.color }}</li>
+            <li class="list-group-item">Location: {{ item.location }}</li>
+        </ul>
+    {% endfor %}
+
+{% endblock %}
+{% block footer %}{% endblock %}
