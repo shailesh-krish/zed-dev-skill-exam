@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+
+    <process name="CustomOrderProcess01" main="true">
+
+        <states>
+            <state name="new" display="oms.state.new"/>
+            <state name="paid" reserved="true" display="oms.state.paid"/>
+            <state name="shipped" reserved="true" display="oms.state.shipped"/>
+            <state name="canceled" display="oms.state.canceled"/>
+            <state name="closed" display="oms.state.closed"/>
+        </states>
+
+        <transitions>
+            <transition happy="true" condition="CustomOrderProcess/IsPaymentAuthorized">
+                <source>new</source>
+                <target>paid</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition happy="true">
+                <source>paid</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>close</event>
+            </transition>
+
+            <transition happy="true">
+                <source>new</source>
+                <target>canceled</target>
+                <event>cancel</event>
+            </transition>
+        </transitions>
+
+        <events>
+            <event name="authorize"
+                   manual="true"
+                   command="CustomOrderProcess/AuthorizePaymentCommand"/>
+            <event name="ship" manual="true"
+                   command="CustomOrderProcess/ShipOrderCommand" />
+            <event name="cancel" manual="true" timeout="1 hour"/>
+            <event name="close" manual="true" timeout="1 hour"/>
+        </events>
+    </process>
+
+
+</statemachine>
